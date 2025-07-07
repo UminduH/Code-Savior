@@ -6,6 +6,7 @@ import Keyboard from "./components/Keyboard";
 import NewGameButton from "./components/NewGameButton";
 import { useState } from "react";
 import languages from "./data/languages";
+import Confetti from "react-confetti";
 
 function App() {
   const [currentWord, setCurrentWord] = useState("react");
@@ -51,6 +52,7 @@ function App() {
         isGameOver={isGameOver}
       />
       {isGameOver && <NewGameButton newGame={newGame} />}
+      {isGameWon && <Confetti recycle={false} numberOfPieces={1200} />}
     </main>
   );
 }
