@@ -1,10 +1,10 @@
 import languages from "../data/languages";
 
-function LanguageList() {
-  const languageElements = languages.map((language) => (
+function LanguageList({ wrongGuessCount }) {
+  const languageElements = languages.map((language, index) => (
     <span
       key={language.name}
-      className="language"
+      className={`language ${index < wrongGuessCount ? "lost" : ""}`}
       style={{
         backgroundColor: language.backgroundColor,
         color: language.color,

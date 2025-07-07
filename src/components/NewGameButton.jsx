@@ -1,5 +1,9 @@
-function NewGameButton() {
-  return <button className="new-game-button">New Game</button>;
+function NewGameButton({ newGame }) {
+  return (
+    <button className="new-game-button" onClick={newGame}>
+      New Game
+    </button>
+  );
 }
 
 export default NewGameButton;

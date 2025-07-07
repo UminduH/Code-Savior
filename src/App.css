@@ -32,15 +32,22 @@ header {
   padding: 0 40px;
   border: 2px dashed #ffc090;
   border-radius: 8px;
+  background: radial-gradient(circle, #2e2c2b, #1f1e1d);
+  box-shadow: 0 0 25px rgba(255, 192, 144, 0.2);
+  transition: transform 0.3s ease;
   margin-bottom: 30px;
+}
+
+header:hover {
+  transform: scale(1.01);
 }
 
 header > h1 {
   color: #f9f4da;
   font-family: "Bitcount Grid Double";
-  font-size: 2rem;
+  font-size: 2.125rem;
   font-weight: 600;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
   margin-bottom: 0;
 }
 
@@ -54,7 +61,7 @@ header > h2 {
 }
 
 header > p {
-  color: #8e8e8e;
+  color: #a0a0a0;
   font-weight: 500;
   font-size: 1rem;
   font-style: italic;
@@ -83,6 +90,24 @@ header > p {
 
 .language-list .language:hover {
   transform: scale(1.1);
+}
+
+.language-list .language.lost::before {
+  content: "💀";
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  font-size: 0.85rem;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.language-list .language.lost:hover {
+  transform: scale(1);
 }
 
 .current-word {
@@ -121,19 +146,40 @@ header > p {
 
 .keyboard button {
   font-family: "Hanken Grotesk", Arial, sans-serif;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 1rem;
   background-color: #fcba29;
   color: #1e1e1e;
-  border: 1px solid #d7d7d7;
+  border: none;
   border-radius: 4px;
   width: 40px;
   height: 40px;
   cursor: pointer;
 }
 
-.keyboard button:hover {
+.keyboard button.available {
+  border: 1.8px solid #d7d7d7;
+}
+
+.keyboard button.available:hover {
   opacity: 0.9;
+}
+
+.keyboard button.correct {
+  background-color: #10a95b;
+}
+
+.keyboard button.incorrect {
+  background-color: #ec5d49;
+}
+
+.keyboard button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.keyboard button:disabled:hover {
+  opacity: 0.5;
 }
 
 .new-game-button {
