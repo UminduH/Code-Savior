@@ -44,4 +44,44 @@ export default [
     backgroundColor: "#2d519f",
     color: "#f9f4da",
   },
+  {
+    name: "C",
+    backgroundColor: "#5555aa",
+    color: "#f9f4da",
+  },
+  {
+    name: "C++",
+    backgroundColor: "#00427e",
+    color: "#f9f4da",
+  },
+  {
+    name: "C#",
+    backgroundColor: "#68217a",
+    color: "#f9f4da",
+  },
+  {
+    name: "Kotlin",
+    backgroundColor: "#7963da",
+    color: "#f9f4da",
+  },
+  {
+    name: "Swift",
+    backgroundColor: "#f05138",
+    color: "#f9f4da",
+  },
+  {
+    name: "PHP",
+    backgroundColor: "#8892be",
+    color: "#1e1e1e",
+  },
+  {
+    name: "Dart",
+    backgroundColor: "#0175c2",
+    color: "#f9f4da",
+  },
+  {
+    name: "Java",
+    backgroundColor: "#5382a1",
+    color: "#f9f4da",
+  },
 ];

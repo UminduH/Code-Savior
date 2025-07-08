@@ -147,6 +147,8 @@ header > p {
   padding: 4px 8px;
   font-weight: 700;
   font-size: 0.75rem;
+  min-width: 50px;
+  text-align: center;
   position: relative;
   transition: transform 0.3s ease;
 }

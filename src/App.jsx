@@ -6,17 +6,17 @@ import Word from "./components/Word";
 import Keyboard from "./components/Keyboard";
 import NewGameButton from "./components/NewGameButton";
 import { useEffect, useRef, useState } from "react";
-import languages from "./data/languages";
 import Confetti from "react-confetti";
-import { getRandomWord } from "./utils/utils";
+import { getRandomLanguages, getRandomWord } from "./utils/utils";
 
 function App() {
   const [currentWord, setCurrentWord] = useState(() => getRandomWord());
   const [guessedLetters, setGuessedLetters] = useState([]);
+  const [languageList, setLanguageList] = useState(() => getRandomLanguages());
 
   const keyboardSectionRef = useRef(null);
 
-  const guessesLeft = languages.length;
+  const guessesLeft = languageList.length;
   const wrongGuessCount = guessedLetters.filter(
     (letter) => !currentWord.includes(letter)
   ).length;
@@ -74,6 +74,7 @@ function App() {
   function newGame() {
     setCurrentWord(getRandomWord());
     setGuessedLetters([]);
+    setLanguageList(getRandomLanguages());
   }
 
   return (
@@ -86,7 +87,10 @@ function App() {
         isWrongGuess={isWrongGuess}
         wrongGuessCount={wrongGuessCount}
       />
-      <LanguageList wrongGuessCount={wrongGuessCount} />
+      <LanguageList
+        wrongGuessCount={wrongGuessCount}
+        languageList={languageList}
+      />
       <Word
         currentWord={currentWord}
         guessedLetters={guessedLetters}

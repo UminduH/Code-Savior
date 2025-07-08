@@ -1,8 +1,7 @@
 import clsx from "clsx";
-import languages from "../data/languages";
 
-function LanguageList({ wrongGuessCount }) {
-  const languageElements = languages.map((language, index) => {
+function LanguageList({ wrongGuessCount, languageList }) {
+  const languageElements = languageList.map((language, index) => {
     const className = clsx("language", {
       lost: index < wrongGuessCount,
     });

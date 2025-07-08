@@ -1,5 +1,6 @@
 import { words } from "../data/words";
 import farewellData from "../data/farewells.json";
+import languages from "../data/languages";
 
 export function getRandomWord() {
   const randomIndex = Math.floor(Math.random() * words.length);
@@ -24,4 +25,16 @@ export function getFarewellText(language) {
 
   const randomIndex = Math.floor(Math.random() * languageFarewells.length);
   return languageFarewells[randomIndex];
+}
+
+export function getRandomLanguages() {
+  const array = languages;
+
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+
+  return array.slice(0, 8);
 }
