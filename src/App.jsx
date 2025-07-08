@@ -91,6 +91,7 @@ function App() {
         currentWord={currentWord}
         guessedLetters={guessedLetters}
         isGameLost={isGameLost}
+        isGameWon={isGameWon}
       />
       <Keyboard
         guessedLetters={guessedLetters}

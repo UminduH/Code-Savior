@@ -1,18 +1,22 @@
-function Word({ currentWord, guessedLetters, isGameLost }) {
-  const letterElements = currentWord.split("").map((letter, index) => (
-    <span
-      key={index}
-      style={{
-        color: isGameLost && !guessedLetters.includes(letter) && "#ec5d49",
-      }}
-    >
-      {guessedLetters.includes(letter)
-        ? letter.toUpperCase()
-        : isGameLost
-        ? letter.toUpperCase()
-        : ""}
-    </span>
-  ));
+import { clsx } from "clsx";
+
+function Word({ currentWord, guessedLetters, isGameLost, isGameWon }) {
+  const letterElements = currentWord.split("").map((letter, index) => {
+    const className = clsx({
+      lost: isGameLost && !guessedLetters.includes(letter),
+      won: isGameWon,
+    });
+
+    return (
+      <span key={index} className={className}>
+        {guessedLetters.includes(letter)
+          ? letter.toUpperCase()
+          : isGameLost
+          ? letter.toUpperCase()
+          : ""}
+      </span>
+    );
+  });
 
   return (
     <section className="current-word">

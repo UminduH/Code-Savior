@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import languages from "../data/languages";
 import { getFarewellText } from "../utils/utils";
 
@@ -35,23 +36,14 @@ function GameStatus({
     return <p>Keep decoding—the programming world is counting on you.</p>;
   }
 
-  const shouldShowFarewell = !isGameOver && isWrongGuess && wrongGuessCount > 0;
+  const className = clsx("game-status", {
+    won: isGameWon,
+    lost: isGameLost,
+    farewell: !isGameOver && isWrongGuess && wrongGuessCount > 0,
+    neutral: !isGameOver && !(isWrongGuess && wrongGuessCount > 0),
+  });
 
-  return (
-    <section
-      className={`game-status ${
-        isGameOver
-          ? isGameWon
-            ? "won"
-            : "lost"
-          : shouldShowFarewell
-          ? "farewell"
-          : "neutral"
-      }`}
-    >
-      {renderGameStatus()}
-    </section>
-  );
+  return <section className={className}>{renderGameStatus()}</section>;
 }
 
 export default GameStatus;

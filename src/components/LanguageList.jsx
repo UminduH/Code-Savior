@@ -1,18 +1,25 @@
+import clsx from "clsx";
 import languages from "../data/languages";
 
 function LanguageList({ wrongGuessCount }) {
-  const languageElements = languages.map((language, index) => (
-    <span
-      key={language.name}
-      className={`language ${index < wrongGuessCount ? "lost" : ""}`}
-      style={{
-        backgroundColor: language.backgroundColor,
-        color: language.color,
-      }}
-    >
-      {language.name}
-    </span>
-  ));
+  const languageElements = languages.map((language, index) => {
+    const className = clsx("language", {
+      lost: index < wrongGuessCount,
+    });
+
+    return (
+      <span
+        key={language.name}
+        className={className}
+        style={{
+          backgroundColor: language.backgroundColor,
+          color: language.color,
+        }}
+      >
+        {language.name}
+      </span>
+    );
+  });
   return <section className="language-list">{languageElements}</section>;
 }
 

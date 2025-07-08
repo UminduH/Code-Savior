@@ -206,6 +206,14 @@ header > p {
   background-color: hsla(0, 0%, 20%, 0.621);
 }
 
+.current-word span.won {
+  color: #82fbbd;
+}
+
+.current-word span.lost {
+  color: #ec5d49;
+}
+
 .word-length {
   margin-top: 10px;
   font-size: 0.9rem;

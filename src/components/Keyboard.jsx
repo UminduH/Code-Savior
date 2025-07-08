@@ -1,3 +1,5 @@
+import clsx from "clsx";
+
 function Keyboard({
   guessedLetters,
   currentWord,
@@ -8,22 +10,25 @@ function Keyboard({
   const lowerCaseAlphabet = Array.from({ length: 26 }, (_, index) =>
     String.fromCharCode(97 + index)
   );
-  const keyboardElements = lowerCaseAlphabet.map((letter) => (
-    <button
-      key={letter}
-      onClick={() => addGuessedLetter(letter)}
-      disabled={isGameOver}
-      className={
-        guessedLetters.includes(letter)
-          ? currentWord.includes(letter)
-            ? "correct"
-            : "incorrect"
-          : "available"
-      }
-    >
-      {letter.toUpperCase()}
-    </button>
-  ));
+  const keyboardElements = lowerCaseAlphabet.map((letter) => {
+    const className = clsx({
+      available: !guessedLetters.includes(letter),
+      correct: guessedLetters.includes(letter) && currentWord.includes(letter),
+      incorrect:
+        guessedLetters.includes(letter) && !currentWord.includes(letter),
+    });
+
+    return (
+      <button
+        key={letter}
+        onClick={() => addGuessedLetter(letter)}
+        disabled={isGameOver}
+        className={className}
+      >
+        {letter.toUpperCase()}
+      </button>
+    );
+  });
 
   return (
     <section className="keyboard" ref={keyboardSectionRef}>
