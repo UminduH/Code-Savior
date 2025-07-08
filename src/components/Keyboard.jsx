@@ -3,6 +3,7 @@ function Keyboard({
   currentWord,
   addGuessedLetter,
   isGameOver,
+  keyboardSectionRef,
 }) {
   const lowerCaseAlphabet = Array.from({ length: 26 }, (_, index) =>
     String.fromCharCode(97 + index)
@@ -24,7 +25,11 @@ function Keyboard({
     </button>
   ));
 
-  return <section className="keyboard">{keyboardElements}</section>;
+  return (
+    <section className="keyboard" ref={keyboardSectionRef}>
+      {keyboardElements}
+    </section>
+  );
 }
 
 export default Keyboard;

@@ -5,7 +5,7 @@ import LanguageList from "./components/LanguageList";
 import Word from "./components/Word";
 import Keyboard from "./components/Keyboard";
 import NewGameButton from "./components/NewGameButton";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import languages from "./data/languages";
 import Confetti from "react-confetti";
 import { getRandomWord } from "./utils/utils";
@@ -13,6 +13,8 @@ import { getRandomWord } from "./utils/utils";
 function App() {
   const [currentWord, setCurrentWord] = useState(() => getRandomWord());
   const [guessedLetters, setGuessedLetters] = useState([]);
+
+  const keyboardSectionRef = useRef(null);
 
   const guessesLeft = languages.length;
   const wrongGuessCount = guessedLetters.filter(
@@ -30,8 +32,16 @@ function App() {
     wrongGuessCount > 0 && !currentWord.includes(lastGuessedLetter);
 
   useEffect(() => {
+    if (isGameOver && keyboardSectionRef.current) {
+      keyboardSectionRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [isGameOver]);
+
+  useEffect(() => {
     function keyboardPresses(event) {
       if (isGameOver) {
+        keyboardSectionRef.current.scrollIntoView({ behavior: "smooth" });
+
         if (event.key === "Enter") {
           newGame();
         }
@@ -87,6 +97,7 @@ function App() {
         currentWord={currentWord}
         addGuessedLetter={addGuessedLetter}
         isGameOver={isGameOver}
+        keyboardSectionRef={keyboardSectionRef}
       />
       {isGameOver && <NewGameButton newGame={newGame} />}
       {isGameWon && <Confetti recycle={false} numberOfPieces={1200} />}
