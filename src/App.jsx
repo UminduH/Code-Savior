@@ -4,12 +4,13 @@ import LanguageList from "./components/LanguageList";
 import Word from "./components/Word";
 import Keyboard from "./components/Keyboard";
 import NewGameButton from "./components/NewGameButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import languages from "./data/languages";
 import Confetti from "react-confetti";
+import { getRandomWord } from "./utils/utils";
 
 function App() {
-  const [currentWord, setCurrentWord] = useState("react");
+  const [currentWord, setCurrentWord] = useState(() => getRandomWord());
   const [guessedLetters, setGuessedLetters] = useState([]);
 
   const guessesLeft = languages.length;
@@ -23,6 +24,30 @@ function App() {
     .every((letter) => guessedLetters.includes(letter));
   const isGameOver = isGameLost || isGameWon;
 
+  useEffect(() => {
+    function keyboardPresses(event) {
+      if (isGameOver) {
+        if (event.key === "Enter") {
+          newGame();
+        }
+        return;
+      }
+
+      const enteredKey = event.key;
+      const isLetter = /^[a-zA-Z]$/.test(enteredKey);
+
+      if (isLetter) {
+        addGuessedLetter(enteredKey.toLowerCase());
+      }
+    }
+
+    document.body.addEventListener("keydown", keyboardPresses);
+
+    return () => {
+      document.body.removeEventListener("keydown", keyboardPresses);
+    };
+  }, [isGameOver]);
+
   function addGuessedLetter(letter) {
     setGuessedLetters((prevGuessedLetters) =>
       prevGuessedLetters.includes(letter)
@@ -32,7 +57,7 @@ function App() {
   }
 
   function newGame() {
-    setCurrentWord("library");
+    setCurrentWord(getRandomWord());
     setGuessedLetters([]);
   }
 
