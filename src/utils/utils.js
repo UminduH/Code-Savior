@@ -1,4 +1,5 @@
 import { words } from "../data/words";
+import farewellData from "../data/farewells.json";
 
 export function getRandomWord() {
   const randomIndex = Math.floor(Math.random() * words.length);
@@ -6,7 +7,7 @@ export function getRandomWord() {
 }
 
 export function getFarewellText(language) {
-  const options = [
+  const languageFarewells = farewellData[language] || [
     `Farewell, ${language}`,
     `Adios, ${language}`,
     `R.I.P., ${language}`,
@@ -21,6 +22,6 @@ export function getFarewellText(language) {
     `${language} has left the building`,
   ];
 
-  const randomIndex = Math.floor(Math.random() * options.length);
-  return options[randomIndex];
+  const randomIndex = Math.floor(Math.random() * languageFarewells.length);
+  return languageFarewells[randomIndex];
 }
