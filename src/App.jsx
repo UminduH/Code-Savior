@@ -1,5 +1,6 @@
 import "./App.css";
 import Header from "./components/Header";
+import GameStatus from "./components/GameStatus";
 import LanguageList from "./components/LanguageList";
 import Word from "./components/Word";
 import Keyboard from "./components/Keyboard";
@@ -23,6 +24,10 @@ function App() {
     .split("")
     .every((letter) => guessedLetters.includes(letter));
   const isGameOver = isGameLost || isGameWon;
+
+  const lastGuessedLetter = guessedLetters[guessedLetters.length - 1];
+  const isWrongGuess =
+    wrongGuessCount > 0 && !currentWord.includes(lastGuessedLetter);
 
   useEffect(() => {
     function keyboardPresses(event) {
@@ -64,6 +69,13 @@ function App() {
   return (
     <main>
       <Header />
+      <GameStatus
+        isGameWon={isGameWon}
+        isGameLost={isGameLost}
+        isGameOver={isGameOver}
+        isWrongGuess={isWrongGuess}
+        wrongGuessCount={wrongGuessCount}
+      />
       <LanguageList wrongGuessCount={wrongGuessCount} />
       <Word
         currentWord={currentWord}

@@ -14,7 +14,12 @@ function Word({ currentWord, guessedLetters, isGameLost }) {
     </span>
   ));
 
-  return <section className="current-word">{letterElements}</section>;
+  return (
+    <section className="current-word">
+      <div className="letters">{letterElements}</div>
+      <p className="word-length">Word length: {currentWord.length}</p>
+    </section>
+  );
 }
 
 export default Word;
